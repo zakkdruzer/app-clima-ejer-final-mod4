@@ -1,0 +1,53 @@
+.weather-app {
+  &__main {
+    flex: 1;
+  }
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: $body-bg;
+}
+
+main {
+  flex: 1;
+}
+
+.hero-section {
+  h1 {
+    color: #212529;
+  }
+
+  p {
+    max-width: 650px;
+  }
+}
+
+#citiesGrid {
+  min-height: 120px;
+}
+
+footer {
+  p,
+  small {
+    margin-bottom: 0;
+  }
+}
+
+a:focus,
+button:focus {
+  outline: 3px solid rgba(13, 110, 253, 0.35);
+  outline-offset: 2px;
+}
+
+@media (max-width: $mobile-max) {
+  .display-5 {
+    font-size: 2rem;
+  }
+
+  .weather-icon {
+    font-size: 2rem;
+  }
+}

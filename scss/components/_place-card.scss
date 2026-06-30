@@ -1,0 +1,18 @@
+.place-card {
+  @include card-elevated;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+  }
+}
+
+.detail-hero {
+  @include card-elevated;
+  background: linear-gradient(135deg, $detail-hero-from, $detail-hero-to);
+  color: white;
+}

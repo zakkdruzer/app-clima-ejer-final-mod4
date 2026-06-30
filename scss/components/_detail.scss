@@ -1,0 +1,13 @@
+#detailSection {
+  display: none;
+}
+
+.detail-hero {
+  background: linear-gradient(135deg, $detail-hero-from, $detail-hero-to);
+  color: white;
+  border-radius: 1rem;
+}
+
+.back-btn {
+  margin-top: 1.5rem;
+}
