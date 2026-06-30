@@ -41,41 +41,42 @@ let currentPlace = null;
     * Un resumen textual de la semana
 ========================================================= */
 function calcularEstadisticas(pronosticoSemanal) {
-  // Valores iniciales para min y max
-  let minSemana = Infinity;
-  let maxSemana = -Infinity;
-  let sumaPromedios = 0;
+  // Tomamos el primer día como base
+  const primerDia = pronosticoSemanal[0];
 
-  // Objeto para contar cuántos días hay de cada estado
+  let minSemana = primerDia.min;
+  let maxSemana = primerDia.max;
+  let sumaPromedios = (primerDia.min + primerDia.max) / 2;
+
   const conteoEstados = {};
+  conteoEstados[primerDia.estado] = 1;
 
-  // Recorremos todos los días del pronóstico
-  pronosticoSemanal.forEach((dia) => {
-    // Actualizar mínimos y máximos de la semana
+  // Recorremos desde el segundo día en adelante
+  for (let i = 1; i < pronosticoSemanal.length; i++) {
+    const dia = pronosticoSemanal[i];
+
     if (dia.min < minSemana) {
       minSemana = dia.min;
     }
+
     if (dia.max > maxSemana) {
       maxSemana = dia.max;
     }
 
-    // Promedio de ese día (min + max) / 2
     const promedioDia = (dia.min + dia.max) / 2;
     sumaPromedios += promedioDia;
 
-    // Contar estados (ej. "Soleado", "Nublado", etc.)
     if (!conteoEstados[dia.estado]) {
       conteoEstados[dia.estado] = 1;
     } else {
       conteoEstados[dia.estado] += 1;
     }
-  });
+  }
 
-  // Promedio de la semana
   const cantidadDias = pronosticoSemanal.length;
   const promedioSemana = sumaPromedios / cantidadDias;
 
-  // Generar resumen textual según el estado más frecuente
+  // Buscar el estado más frecuente
   let estadoDominante = null;
   let maxConteo = 0;
 
@@ -86,9 +87,7 @@ function calcularEstadisticas(pronosticoSemanal) {
     }
   }
 
-  // Texto de resumen básico, puedes ajustarlo a tu gusto
   let resumen = "Semana variada en cuanto al clima.";
-
   if (estadoDominante) {
     resumen = `Semana mayormente ${estadoDominante.toLowerCase()}.`;
   }
@@ -97,7 +96,7 @@ function calcularEstadisticas(pronosticoSemanal) {
   return {
     minSemana,
     maxSemana,
-    promedioSemana: Math.round(promedioSemana), // redondeamos para mostrar
+    promedioSemana: Math.round(promedioSemana),
     conteoEstados,
     resumen,
   };
