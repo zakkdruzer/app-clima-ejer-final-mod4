@@ -103,6 +103,15 @@ function calcularEstadisticas(pronosticoSemanal) {
 }
 
 /* =========================================================
+  FUNCIÓN: buscarLugarPorId(id)
+  - Recibe un id de lugar
+  - Devuelve el objeto lugar correspondiente
+========================================================= */
+function buscarLugarPorId(id) {
+  return lugares.find((place) => place.id === id);
+}
+
+/* =========================================================
   FUNCIÓN: renderCities()
   - Recorre el arreglo lugares
   - Crea una card Bootstrap por cada lugar
@@ -165,7 +174,7 @@ function addCardEvents() {
     button.addEventListener("click", () => {
       const placeId = button.getAttribute("data-place-id");
       // Buscamos el lugar en el arreglo lugares
-      const selectedPlace = lugares.find((place) => place.id === placeId);
+      const selectedPlace = buscarLugarPorId(placeId);
 
       if (selectedPlace) {
         showDetail(selectedPlace);
